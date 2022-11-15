@@ -1,4 +1,6 @@
 import { useState } from 'react'
+
+import { Mermaid } from "./mermaid"
 import reactLogo from './assets/react.svg'
 import './App.css'
 
@@ -24,6 +26,14 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
+      <Mermaid chart={`
+      graph TD
+      A[Christmas] -->|Get money| B(Go shopping)
+      B --> C{Let me think}
+      C -->|One| D[Laptop]
+      C -->|Two| E[iPhone]
+      C -->|Three| F[fa:fa-car Car]
+      `}></Mermaid>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
