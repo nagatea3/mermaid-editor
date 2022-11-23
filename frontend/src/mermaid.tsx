@@ -1,7 +1,7 @@
 import mermaid from "mermaid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const default_chart_text: string = 
+const defaultChartText: string = 
 `graph TD
 A[Christmas] -->|Get money| B(Go shopping)
 B --> C{Let me think}
@@ -10,19 +10,30 @@ C -->|Two| E[iPhone]
 C -->|Three| F[fa:fa-car Car]
 `
 
-export const Mermaid = () => {
-  mermaid.contentLoaded();
-  const [chart_text, setMessage] = useState(default_chart_text);
+let isFirstRendering = true;
 
-  const handleMessageChange = ( event: React.ChangeEvent<HTMLTextAreaElement> ) => {
+export const Mermaid = () => {
+  const [chartText, setMessage] = useState<string>(defaultChartText);
+
+  const handleMessageChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(event.target.value);
-    mermaid.init();
   }
+
+  useEffect(() => {
+    if (isFirstRendering) {
+      isFirstRendering = false;
+      return;
+    }
+    document.getElementById("mermaid-chart")?.removeAttribute("data-processed");
+    mermaid.contentLoaded();
+  }, [ chartText ]);
   
-  return <>
+  return (
+  <>
     <textarea name="chart"
-     value={chart_text}
+     value={chartText}
      onChange={handleMessageChange} />
-    <div className="mermaid">{chart_text}</div>
-  </>;
+    <div id="mermaid-chart" className="mermaid">{chartText}</div>
+  </>
+  );
 };
