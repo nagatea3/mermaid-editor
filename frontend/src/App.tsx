@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Mermaid } from "./mermaid"
+import { Mermaid } from "./Mermaid"
 import reactLogo from './assets/react.svg'
 import './App.css'
 
