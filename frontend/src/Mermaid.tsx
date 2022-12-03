@@ -1,5 +1,5 @@
 import mermaid from "mermaid";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 let isFirstRendering = true;
 
@@ -8,16 +8,18 @@ type MermaidProps = {
 }
 
 export const Mermaid = ({chartText}: MermaidProps) => {
+  const refMermaid = useRef<HTMLDivElement>(null);
+  
   useEffect(() => {
     if (isFirstRendering) {
       isFirstRendering = false;
       return;
     }
-    document.getElementById("mermaid-chart")?.removeAttribute("data-processed");
+    refMermaid.current?.removeAttribute("data-processed");
     mermaid.contentLoaded();
   }, [ chartText ]);
   
   return (
-    <div id="mermaid-chart" className="mermaid">{chartText}</div>
+    <div className="mermaid" ref={refMermaid}>{chartText}</div>
   );
 };
