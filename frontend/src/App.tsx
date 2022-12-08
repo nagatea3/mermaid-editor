@@ -1,8 +1,7 @@
 import { useState } from 'react'
 
 import { Mermaid } from "./Mermaid"
-import { Editor } from "./Editor"
-import './App.css'
+import { EditorWindow } from "./EditorWindow"
 
 function App() {
   const [chartText, setChartText] = useState<string>(`graph TD
@@ -14,8 +13,8 @@ function App() {
   `);
 
   return (
-    <div className="App">
-      <Editor chartText={chartText} setChartText={setChartText} />
+    <div className="flex items-center justify-center">
+      <EditorWindow chartText={chartText} setChartText={setChartText} />
       <Mermaid chartText={chartText} />
     </div>
   )
