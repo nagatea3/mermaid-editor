@@ -1,20 +1,20 @@
 import Editor from "@monaco-editor/react";
+import { editor } from "monaco-editor/esm/vs/editor/editor.api";
 
 type EditorPros = {
-  chartText: string,
-  setChartText: React.Dispatch<React.SetStateAction<string>>,
-}
+  chartText: string;
+  setChartText: React.Dispatch<React.SetStateAction<string>>;
+};
 
-export const EditorWindow = ( {chartText, setChartText}: EditorPros ) => {
-  const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setChartText(event.target.value);
-  }
+export const EditorWindow = ({ chartText, setChartText }: EditorPros) => {
+  const handleTextChange = (
+    value: string | undefined,
+    ev: editor.IModelContentChangedEvent
+  ) => {
+    if (value !== undefined) {
+      setChartText(value);
+    }
+  };
 
-  return (
-    <div>
-      <textarea name="chart"
-        value={chartText}
-        onChange={handleTextChange} />
-    </div>
-  );
+  return <Editor defaultValue={chartText} onChange={handleTextChange} />;
 };
