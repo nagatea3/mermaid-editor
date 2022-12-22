@@ -13,11 +13,11 @@ function App() {
 
   return (
     <>
-      <div className="flex justify-center h-screen w-screen">
-        <div className="w-full m-3">
+      <div className="flex h-screen w-screen justify-center">
+        <div className="m-3 w-full">
           <EditorWindow chartText={chartText} setChartText={setChartText} />
         </div>
-        <div className="w-full m-3">
+        <div className="m-3 w-full">
           <Mermaid chartText={chartText} />
         </div>
       </div>
