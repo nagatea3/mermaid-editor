@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Mermaid } from "./Mermaid";
 import { EditorWindow } from "./EditorWindow";
+import { Navbar } from "./Navbar";
 
 function App() {
   const [chartText, setChartText] = useState<string>(`graph TD
@@ -13,12 +14,15 @@ function App() {
 
   return (
     <>
-      <div className="flex h-screen w-screen justify-center">
-        <div className="m-3 w-full">
-          <EditorWindow chartText={chartText} setChartText={setChartText} />
-        </div>
-        <div className="m-3 w-full">
-          <Mermaid chartText={chartText} />
+      <div className="flex flex-col ">
+        <Navbar />
+        <div className="flex h-screen w-screen justify-center">
+          <div className="m-3 w-full">
+            <EditorWindow chartText={chartText} setChartText={setChartText} />
+          </div>
+          <div className="m-3 w-full">
+            <Mermaid chartText={chartText} />
+          </div>
         </div>
       </div>
     </>
